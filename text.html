@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOLDERIT - Document Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* FOLDERIT Document Management System Styles */
+
+:root {
+  --primary: #00a8e8; /* Teal blue */
+  --primary-dark: #0077b6;
+  --primary-light: #90e0ef;
+  --primary-bg: #e6f9ff;
+  --dark-bg: #1a1a2e;
+  --dark-text: #ffffff;
+  --light-text: #333333;
+  --sidebar-bg: #f5f5f5;
+  --sidebar-active: #e0f7fa;
+  --sidebar-border: #e0e0e0;
+  --border-color: #e0e0e0;
+  --hover-bg: #f0f0f0;
+  
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--light-text);
+  background-color: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Top Navigation Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 16px;
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+  z-index: 10;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #ffc107; /* Yellow logo */
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-right: 8px;
+}
+
+.logo-tagline {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-email {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dark-text);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.menu-toggle {
+  color: var(--dark-text);
+  font-size: 16px;
+}
+
+.notification-btn, .help-btn {
+  color: var(--dark-text);
+  font-size: 16px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-700);
+  padding: 0 20px 16px;
+}
+
+.sidebar-nav {
+  flex: 1;
+}
+
+.nav-list {
+  margin-bottom: 20px;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item.active {
+  border-left: 3px solid var(--primary);
+}
+
+.nav-item.active .nav-link {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: var(--gray-700);
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--hover-bg);
+}
+
+.nav-item.active .nav-link {
+  background-color: var(--sidebar-active);
+}
+
+.create-section-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.create-section-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.admin-section {
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.admin-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.admin-item {
+  margin-bottom: 8px;
+}
+
+.admin-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-600);
+  padding: 8px 0;
+}
+
+.admin-link:hover {
+  color: var(--primary);
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Action Toolbar */
+.action-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: var(--radius);
+  color: var(--gray-700);
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.action-btn i {
+  font-size: 16px;
+  color: var(--primary);
+}
+
+.search-section {
+  display: flex;
+  gap: 12px;
+}
+
+.upload-container {
+  display: flex;
+  height: 40px;
+}
+
+.upload-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0 20px;
+  border-radius: var(--radius) 0 0 var(--radius);
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.upload-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.upload-dropdown-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0 8px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.upload-dropdown-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.search-container {
+  display: flex;
+  height: 40px;
+}
+
+.search-input {
+  width: 250px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+}
+
+.search-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0 12px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ffffff;
+}
+
+.breadcrumb-item {
+  color: var(--gray-600);
+}
+
+.breadcrumb-item.current {
+  color: var(--gray-800);
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: var(--gray-400);
+  font-size: 10px;
+}
+
+/* Document List */
+.document-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+.document-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--gray-50);
+}
+
+.select-all {
+  width: 40px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.name-column {
+  flex: 1;
+}
+
+.tags-column {
+  width: 200px;
+}
+
+.date-column {
+  width: 120px;
+}
+
+.sortable {
+  cursor: pointer;
+}
+
+.view-options {
+  display: flex;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.view-btn {
+  padding: 4px;
+  color: var(--gray-500);
+  border-radius: var(--radius);
+}
+
+.view-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.view-btn.active {
+  color: var(--primary);
+}
+
+.document-list {
+  flex: 1;
+}
+
+.document-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+}
+
+.document-row:hover {
+  background-color: var(--hover-bg);
+}
+
+.select-cell {
+  width: 40px;
+}
+
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.folder-icon {
+  color: var(--gray-500);
+}
+
+.document-name {
+  font-weight: 500;
+}
+
+.tags-cell {
+  width: 200px;
+}
+
+.date-cell {
+  width: 120px;
+  color: var(--gray-600);
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.document-row:hover .actions-cell {
+  opacity: 1;
+}
+
+.action-icon-btn {
+  color: var(--gray-500);
+  padding: 4px;
+  border-radius: var(--radius);
+}
+
+.action-icon-btn:hover {
+  background-color: var(--gray-200);
+  color: var(--primary);
+}
+
+/* Import Section */
+.import-section {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.import-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-600);
+  padding: 8px 16px;
+  background-color: var(--gray-50);
+  border-radius: var(--radius);
+  width: fit-content;
+}
+
+.import-button:hover {
+  background-color: var(--gray-100);
+}
+
+/* Storage Info */
+.storage-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  color: var(--gray-600);
+  font-size: 13px;
+  background-color: var(--gray-50);
+}
+
+.storage-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.export-options {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.export-link {
+  color: var(--primary);
+}
+
+.export-link:hover {
+  text-decoration: underline;
+}
+
+/* Floating Action Buttons */
+.floating-actions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+.chat-btn {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+  }
+  
+  .action-btn span {
+    display: none;
+  }
+  
+  .search-input {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid var(--sidebar-border);
+  }
+  
+  .action-toolbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .action-buttons {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  
+  .search-section {
+    width: 100%;
+  }
+  
+  .upload-container {
+    flex: 1;
+  }
+  
+  .search-container {
+    flex: 2;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .user-email {
+    display: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="logo-container">
+        <div class="logo-icon"></div>
+        <span class="logo-text">FOLDERIT</span>
+        <span class="logo-tagline">Your documents. Managed.</span>
+      </div>
+      
+      <div class="user-section">
+        <span class="user-email">darinesouliah040623@gmail.com</span>
+        <button class="logout-btn">
+          <i class="fas fa-power-off"></i>
+          Log Out
+        </button>
+        <div class="user-menu">
+          <span class="username">loulita</span>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <button class="notification-btn">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button class="help-btn">
+          <i class="fas fa-question-circle"></i>
+        </button>
+      </div>
+    </header>
+    
+    <!-- Main Content Area -->
+    <div class="main-container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Main sections</h2>
+        
+        <nav class="sidebar-nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>Inbox</span>
+                <i class="fas fa-envelope"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>#team</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="#" class="nav-link">
+                <span>Projects</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>Finance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>Human Resources</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>Operations</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span>Legal</span>
+              </a>
+            </li>
+          </ul>
+          
+          <button class="create-section-btn">
+            <i class="fas fa-plus-circle"></i>
+            Create new section
+          </button>
+        </nav>
+        
+        <div class="admin-section">
+          <h3 class="admin-title">Admin tools</h3>
+          <ul class="admin-list">
+            <li class="admin-item">
+              <a href="#" class="admin-link">
+                <i class="fas fa-chart-line"></i>
+                Dashboard & Reports
+              </a>
+            </li>
+            <li class="admin-item">
+              <a href="#" class="admin-link">
+                <i class="fas fa-users"></i>
+                Manage users
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      
+      <!-- Content Area -->
+      <main class="content">
+        <!-- Action Toolbar -->
+        <div class="action-toolbar">
+          <div class="action-buttons">
+            <button id="addFolderBtn" class="action-btn" title="Add Folder" onclick="openModal()">
+              <i class="fas fa-folder-plus"></i>
+              <span>+Folder</span>
+            </button>
+            <button class="action-btn" title="Modify">
+              <i class="fas fa-cog"></i>
+              <span>Modify</span>
+            </button>
+            <button class="action-btn" title="Columns">
+              <i class="fas fa-columns"></i>
+              <span>Columns</span>
+            </button>
+            <button class="action-btn" title="Meta">
+              <i class="fas fa-tag"></i>
+              <span>Meta</span>
+            </button>
+            <button class="action-btn" title="Retention">
+              <i class="fas fa-archive"></i>
+              <span>Retention</span>
+            </button>
+            <button class="action-btn" title="Workflow">
+              <i class="fas fa-random"></i>
+              <span>Workflow</span>
+            </button>
+            <button class="action-btn" title="Audit Log">
+              <i class="fas fa-clipboard-list"></i>
+              <span>Audit Log</span>
+            </button>
+            <button class="action-btn" title="Numbering">
+              <i class="fas fa-list-ol"></i>
+              <span>Numbering</span>
+            </button>
+          </div>
+          
+          <div class="search-section">
+            <div class="upload-container">
+              <button class="upload-btn">Upload</button>
+              <button class="upload-dropdown-btn">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            
+            <div class="search-container">
+              <input type="text" placeholder="Search docs, tags, etc" class="search-input">
+              <button class="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+          <a href="#" class="breadcrumb-item">loulita</a>
+          <i class="fas fa-chevron-right breadcrumb-separator"></i>
+          <a href="#" class="breadcrumb-item current">Projects</a>
+        </div>
+        
+        <!-- Document List -->
+        <div class="document-container">
+          <div class="document-header">
+            <div class="select-all">
+              <input type="checkbox" id="selectAll">
+            </div>
+            <div class="column-header name-column sortable">
+              <span>Name</span>
+              <i class="fas fa-sort-down"></i>
+            </div>
+            <div class="column-header tags-column">
+              <span>Tags</span>
+            </div>
+            <div class="column-header date-column">
+              <span>Date</span>
+            </div>
+            <div class="view-options">
+              <button class="view-btn list-view active">
+                <i class="fas fa-list"></i>
+              </button>
+              <button class="view-btn grid-view">
+                <i class="fas fa-th"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="document-list" id="documentList">
+            <!-- Folder rows will be managed by JavaScript only. -->
+          </div>
+          
+          <div class="import-section">
+            <div class="import-button">
+              <i class="fas fa-envelope"></i>
+              <i class="fas fa-arrow-right"></i>
+              <span>Import files via email</span>
+            </div>
+          </div>
+          
+          <div class="storage-info">
+            <div class="storage-text">
+              <span>0 files and 1 folder (0 B) in this location</span>
+              <span>96.3 kB of 10.0 GB total storage used</span>
+            </div>
+            <div class="export-options">
+              <span>Export report to</span>
+              <a href="#" class="export-link">XLSX</a>
+              <span>/</span>
+              <a href="#" class="export-link">ODS</a>
+              <span>/</span>
+              <a href="#" class="export-link">CSV</a>
+              <span>/</span>
+              <a href="#" class="export-link">PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Floating Action Buttons -->
+        <div class="floating-actions">
+          <button class="floating-btn refresh-btn">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+          <button class="floating-btn apps-btn">
+            <i class="fas fa-th"></i>
+          </button>
+          <button class="floating-btn chat-btn">
+            <i class="fas fa-comment-dots"></i>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <div id="addFolderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50" style="display:none;">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6 relative">
+      <button id="closeModalBtn" type="button" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      <h2 class="text-lg font-semibold mb-4">Create New Folder</h2>
+      <form id="addFolderForm" class="space-y-4">
+        <input type="text" name="folder_name" id="folderNameInput" placeholder="Folder name" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+        <div class="flex justify-end">
+          <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700">Create</button>
+        </div>
+        <div id="folderMessage" class="mt-2 text-sm"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Floating Modal -->
+<div id="folderModal" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+    <h2 class="text-xl font-bold mb-4">Create New Folder</h2>
+    <input id="folderName" type="text" placeholder="Folder name"
+      class="w-full p-2 border border-gray-300 rounded mb-4">
+    <div class="flex justify-end space-x-2">
+      <button onclick="closeModal()" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+      <button onclick="createFolder()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- Folder Table -->
+<div class="mt-8 bg-white shadow rounded-lg overflow-hidden">
+  <table class="min-w-full table-auto">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-4 py-2 text-left">#</th>
+        <th class="px-4 py-2 text-left">Folder Name</th>
+      </tr>
+    </thead>
+    <tbody id="folderTableBody">
+      <!-- Folder rows will be inserted here -->
+    </tbody>
+  </table>
+</div>
+
+
+  <script src="script.js">// FOLDERIT Document Management System JavaScript
+
+// Sample document data
+const documents = [
+  {
+    id: "1",
+    name: "data",
+    type: "folder",
+    size: "0 B",
+    modified: "2025-05-19",
+    tags: []
+  },
+  {
+    id: "2",
+    name: "Project Proposal.docx",
+    type: "docx",
+    size: "245 KB",
+    modified: "2025-05-15",
+    tags: ["proposal", "client"]
+  },
+  {
+    id: "3",
+    name: "Financial Report Q2.xlsx",
+    type: "xlsx",
+    size: "1.2 MB",
+    modified: "2025-05-10",
+    tags: ["finance", "quarterly"]
+  },
+  {
+    id: "4",
+    name: "Marketing Presentation.pptx",
+    type: "pptx",
+    size: "3.5 MB",
+    modified: "2025-05-08",
+    tags: ["marketing", "presentation"]
+  },
+  {
+    id: "5",
+    name: "Client Contract.pdf",
+    type: "pdf",
+    size: "780 KB",
+    modified: "2025-05-05",
+    tags: ["legal", "contract"]
+  }
+];
+
+// DOM Elements
+const documentList = document.getElementById('documentList');
+const selectAllCheckbox = document.getElementById('selectAll');
+const searchInput = document.querySelector('.search-input');
+const searchBtn = document.querySelector('.search-btn');
+const uploadBtn = document.querySelector('.upload-btn');
+const sortableHeaders = document.querySelectorAll('.sortable');
+const viewButtons = document.querySelectorAll('.view-btn');
+
+// State
+let selectedDocuments = [];
+let currentSort = {
+  field: 'name',
+  direction: 'asc'
+};
+let currentView = 'list';
+
+// Initialize the application
+function init() {
+  renderDocuments();
+  setupEventListeners();
+}
+
+// Setup all event listeners
+function setupEventListeners() {
+  // Select all checkbox
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', handleSelectAll);
+  }
+  
+  // Search
+  if (searchBtn) {
+    searchBtn.addEventListener('click', handleSearch);
+  }
+  
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    });
+  }
+  
+  // Upload button
+  if (uploadBtn) {
+    uploadBtn.addEventListener('click', handleUpload);
+  }
+  
+  // Sortable headers
+  sortableHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const field = header.classList.contains('name-column') ? 'name' : 
+                   header.classList.contains('tags-column') ? 'tags' : 'modified';
+      handleSort(field);
+    });
+  });
+  
+  // View buttons
+  viewButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const view = button.classList.contains('list-view') ? 'list' : 'grid';
+      handleViewChange(view);
+    });
+  });
+  
+  // Document row selection
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('document-checkbox')) {
+      handleDocumentSelection(e);
+    }
+  });
+}
+
+// Handle select all checkbox
+function handleSelectAll() {
+  const isChecked = selectAllCheckbox.checked;
+  
+  const checkboxes = document.querySelectorAll('.document-checkbox');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = isChecked;
+  });
+  
+  if (isChecked) {
+    selectedDocuments = documents.map(doc => doc.id);
+    document.querySelectorAll('.document-row').forEach(row => {
+      row.classList.add('selected');
+    });
+  } else {
+    selectedDocuments = [];
+    document.querySelectorAll('.document-row').forEach(row => {
+      row.classList.remove('selected');
+    });
+  }
+  
+  updateActionButtonsState();
+}
+
+// Handle document selection
+function handleDocumentSelection(e) {
+  const checkbox = e.target;
+  const docId = checkbox.closest('.document-row').dataset.id;
+  
+  if (checkbox.checked) {
+    selectedDocuments.push(docId);
+    checkbox.closest('.document-row').classList.add('selected');
+  } else {
+    selectedDocuments = selectedDocuments.filter(id => id !== docId);
+    checkbox.closest('.document-row').classList.remove('selected');
+  }
+  
+  // Update select all checkbox
+  if (selectAllCheckbox) {
+    if (selectedDocuments.length === documents.length) {
+      selectAllCheckbox.checked = true;
+    } else {
+      selectAllCheckbox.checked = false;
+    }
+  }
+  
+  updateActionButtonsState();
+}
+
+// Handle search
+function handleSearch() {
+  const searchTerm = searchInput.value.toLowerCase().trim();
+  
+  if (searchTerm === '') {
+    renderDocuments();
+    return;
+  }
+  
+  const filteredDocs = documents.filter(doc => 
+    doc.name.toLowerCase().includes(searchTerm) || 
+    (doc.tags && doc.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+  );
+  
+  renderFilteredDocuments(filteredDocs);
+  
+  // Show notification
+  showNotification('info', 'Search Results', `Found ${filteredDocs.length} items matching "${searchTerm}"`);
+}
+
+// Handle upload
+function handleUpload() {
+  // Simulate file upload
+  showNotification('info', 'Upload', 'Upload functionality would open a file picker here');
+  
+  // In a real application, you would open a file picker dialog
+  // const input = document.createElement('input');
+  // input.type = 'file';
+  // input.multiple = true;
+  // input.click();
+  
+  // input.addEventListener('change', handleFileSelection);
+}
+
+// Handle sorting
+function handleSort(field) {
+  if (currentSort.field === field) {
+    // Toggle direction if same field
+    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+  } else {
+    // New field, default to ascending
+    currentSort.field = field;
+    currentSort.direction = 'asc';
+  }
+  
+  // Update UI to show sort direction
+  sortableHeaders.forEach(header => {
+    header.classList.remove('sort-asc', 'sort-desc');
+    
+    if (header.classList.contains(`${field}-column`)) {
+      header.classList.add(`sort-${currentSort.direction}`);
+    }
+  });
+  
+  renderDocuments();
+}
+
+// Handle view change
+function handleViewChange(view) {
+  currentView = view;
+  
+  // Update active view button
+  viewButtons.forEach(button => {
+    button.classList.remove('active');
+    if ((view === 'list' && button.classList.contains('list-view')) || 
+        (view === 'grid' && button.classList.contains('grid-view'))) {
+      button.classList.add('active');
+    }
+  });
+  
+  // Update document container class
+  const container = document.querySelector('.document-container');
+  if (container) {
+    container.classList.remove('list-view', 'grid-view');
+    container.classList.add(`${view}-view`);
+  }
+  
+  renderDocuments();
+}
+
+// Update action buttons state based on selection
+function updateActionButtonsState() {
+  const actionButtons = document.querySelectorAll('.action-btn:not([title="Add Folder"])');
+  const hasSelection = selectedDocuments.length > 0;
+  
+  actionButtons.forEach(button => {
+    if (hasSelection) {
+      button.classList.remove('disabled');
+    } else {
+      button.classList.add('disabled');
+    }
+  });
+}
+
+// Render documents to the list
+function renderDocuments() {
+  if (!documentList) return;
+  
+  // Sort documents
+  const sortedDocuments = [...documents].sort((a, b) => {
+    let valueA, valueB;
+    
+    if (currentSort.field === 'modified') {
+      valueA = new Date(a.modified).getTime();
+      valueB = new Date(b.modified).getTime();
+    } else if (currentSort.field === 'tags') {
+      valueA = (a.tags && a.tags.length > 0) ? a.tags[0].toLowerCase() : '';
+      valueB = (b.tags && b.tags.length > 0) ? b.tags[0].toLowerCase() : '';
+    } else {
+      valueA = a[currentSort.field].toString().toLowerCase();
+      valueB = b[currentSort.field].toString().toLowerCase();
+    }
+    
+    if (currentSort.direction === 'asc') {
+      return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+    } else {
+      return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+    }
+  });
+  
+  renderFilteredDocuments(sortedDocuments);
+}
+
+// Render filtered documents
+function renderFilteredDocuments(filteredDocs) {
+  if (!documentList) return;
+  
+  // Clear the document list
+  documentList.innerHTML = '';
+  
+  if (filteredDocs.length === 0) {
+    const emptyMessage = document.createElement('div');
+    emptyMessage.className = 'empty-message';
+    emptyMessage.textContent = 'No documents found';
+    documentList.appendChild(emptyMessage);
+    return;
+  }
+  
+  // Add document rows
+  filteredDocs.forEach(doc => {
+    const row = document.createElement('div');
+    row.className = `document-row ${selectedDocuments.includes(doc.id) ? 'selected' : ''}`;
+    row.dataset.id = doc.id;
+    
+    // Format date
+    const date = new Date(doc.modified);
+    const formattedDate = date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    
+    // Determine icon based on type
+    let iconClass = 'fa-file';
+    if (doc.type === 'folder') {
+      iconClass = 'fa-folder';
+    } else if (doc.type === 'docx') {
+      iconClass = 'fa-file-word';
+    } else if (doc.type === 'xlsx') {
+      iconClass = 'fa-file-excel';
+    } else if (doc.type === 'pptx') {
+      iconClass = 'fa-file-powerpoint';
+    } else if (doc.type === 'pdf') {
+      iconClass = 'fa-file-pdf';
+    }
+    
+    row.innerHTML = `
+      <div class="select-cell">
+        <input type="checkbox" class="document-checkbox" ${selectedDocuments.includes(doc.id) ? 'checked' : ''}>
+      </div>
+      <div class="name-cell">
+        <i class="fas ${iconClass} folder-icon"></i>
+        <span class="document-name">${doc.name}</span>
+      </div>
+      <div class="tags-cell">
+        ${doc.tags ? doc.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+      </div>
+      <div class="date-cell">
+        <span>${formattedDate}</span>
+      </div>
+      <div class="actions-cell">
+        <button class="action-icon-btn" title="Share">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        <button class="action-icon-btn" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+        <button class="action-icon-btn" title="Download">
+          <i class="fas fa-download"></i>
+        </button>
+      </div>
+    `;
+    
+    documentList.appendChild(row);
+  });
+}
+
+// Show notification
+function showNotification(type, title, message) {
+  const notificationContainer = document.querySelector('.notification-container') || createNotificationContainer();
+  
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  
+  let iconClass = 'fa-info-circle';
+  if (type === 'success') {
+    iconClass = 'fa-check-circle';
+  } else if (type === 'error') {
+    iconClass = 'fa-exclamation-circle';
+  } else if (type === 'warning') {
+    iconClass = 'fa-exclamation-triangle';
+  }
+  
+  notification.innerHTML = `
+    <div class="notification-icon">
+      <i class="fas ${iconClass}"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">${title}</div>
+      <div class="notification-message">${message}</div>
+    </div>
+    <button class="notification-close">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+  
+  notificationContainer.appendChild(notification);
+  
+  // Add event listener to close button
+  const closeBtn = notification.querySelector('.notification-close');
+  closeBtn.addEventListener('click', () => {
+    notification.classList.add('closing');
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  });
+  
+  // Auto-remove notification after 5 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.classList.add('closing');
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }
+  }, 5000);
+}
+
+// Create notification container if it doesn't exist
+function createNotificationContainer() {
+  const container = document.createElement('div');
+  container.className = 'notification-container';
+  document.body.appendChild(container);
+  return container;
+}
+
+// Add CSS for notifications
+function addNotificationStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .notification-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .notification {
+      display: flex;
+      align-items: flex-start;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 12px;
+      width: 300px;
+      animation: slideIn 0.3s ease forwards;
+    }
+    
+    .notification.closing {
+      animation: slideOut 0.3s ease forwards;
+    }
+    
+    .notification-icon {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+    
+    .notification.success .notification-icon {
+      color: #10b981;
+    }
+    
+    .notification.error .notification-icon {
+      color: #ef4444;
+    }
+    
+    .notification.warning .notification-icon {
+      color: #f59e0b;
+    }
+    
+    .notification.info .notification-icon {
+      color: #00a8e8;
+    }
+    
+    .notification-content {
+      flex: 1;
+    }
+    
+    .notification-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .notification-message {
+      color: #6b7280;
+      font-size: 13px;
+    }
+    
+    .notification-close {
+      color: #9ca3af;
+      padding: 4px;
+      border-radius: 4px;
+    }
+    
+    .notification-close:hover {
+      background-color: #f3f4f6;
+      color: #4b5563;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  `;
+  
+  document.head.appendChild(style);
+}
+
+// Initialize the application when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  addNotificationStyles();
+  init();
+});
+
+// Modal open/close logic
+const addFolderBtn = document.getElementById('addFolderBtn');
+const addFolderModal = document.getElementById('addFolderModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const addFolderForm = document.getElementById('addFolderForm');
+const folderNameInput = document.getElementById('folderNameInput');
+const folderMessage = document.getElementById('folderMessage');
+addFolderBtn.addEventListener('click', () => {
+  addFolderModal.style.display = 'flex';
+  folderMessage.textContent = '';
+  folderNameInput.value = '';
+  folderNameInput.focus();
+});
+closeModalBtn.addEventListener('click', () => {
+  addFolderModal.style.display = 'none';
+});
+window.addEventListener('click', (e) => {
+  if (e.target === addFolderModal) {
+    addFolderModal.style.display = 'none';
+  }
+});
+addFolderForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  folderMessage.textContent = '';
+  const folderName = folderNameInput.value.trim();
+  if (!folderName) return;
+  fetch('create_folder.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'folder_name=' + encodeURIComponent(folderName)
+  })
+  .then(res => res.json())
+  .then(data => {
+    folderMessage.textContent = data.message;
+    if (data.success) {
+      addFolderModal.style.display = 'none';
+      fetchAndRenderFolders();
+    }
+  })
+  .catch(() => {
+    folderMessage.textContent = 'Error creating folder.';
+  });
+});
+
+// Helper to fetch and render folders from the server
+function fetchAndRenderFolders() {
+  fetch('list_files.php?type=folder')
+    .then(res => res.json())
+    .then(folders => {
+      documentList.innerHTML = '';
+      if (!folders || folders.length === 0) {
+        documentList.innerHTML = '<div class="empty-message">No folders found</div>';
+        return;
+      }
+      folders.forEach(folder => {
+        const row = document.createElement('div');
+        row.className = 'document-row';
+        row.setAttribute('data-folder', folder.name);
+        row.innerHTML = `
+          <div class="select-cell"><input type="checkbox" class="document-checkbox"></div>
+          <div class="name-cell"><i class="fas fa-folder folder-icon"></i> <span class="document-name">${folder.name}</span></div>
+          <div class="tags-cell"></div>
+          <div class="date-cell"><span>${folder.date}</span></div>
+          <div class="actions-cell">
+            <button class="action-icon-btn"><i class="fas fa-share-alt"></i></button>
+            <button class="action-icon-btn"><i class="fas fa-cog"></i></button>
+            <button class="action-icon-btn"><i class="fas fa-download"></i></button>
+          </div>
+        `;
+        documentList.appendChild(row);
+      });
+    });
+}
+
+// On page load, fetch and render folders
+fetchAndRenderFolders();
+
+  let folders = [];
+
+  function openModal() {
+    document.getElementById('folderModal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('folderModal').classList.add('hidden');
+    document.getElementById('folderName').value = '';
+  }
+
+  function createFolder() {
+    const name = document.getElementById('folderName').value.trim();
+    if (name) {
+      folders.push(name);
+      updateFolderTable();
+      closeModal();
+    }
+  }
+
+  function updateFolderTable() {
+    const tableBody = document.getElementById('folderTableBody');
+    tableBody.innerHTML = '';
+
+    folders.forEach((folder, index) => {
+      const row = `<tr class="border-b">
+        <td class="px-4 py-2">${index + 1}</td>
+        <td class="px-4 py-2">${folder}</td>
+      </tr>`;
+      tableBody.insertAdjacentHTML('beforeend', row);
+    });
+  }
+
+
+</script>
+</body>
+</html>
