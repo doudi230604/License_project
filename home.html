@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataAssist - Computer Data Assisted Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+                            <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">DataAssist</span>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <nav class="nav-buttons">
+                   <a href="featers.html" class="nav-btn">Features</a>
+                   <a href="policies.html" class="nav-btn">Policies</a>
+                   <a href="aboutus.html" class="nav-btn">About</a>
+                 </nav>
+
+
+                <!-- Login Button -->
+                <button onclick="window.location.href='http://localhost/succlogin/login2.php'" class="login-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                        <polyline points="10,17 15,12 10,7"/>
+                        <line x1="15" y1="12" x2="3" y2="12"/>
+                    </svg>
+                    Login
+                </button>
+            </div>
+        </div>
+    </header>
+    <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #ecfdf5 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header Styles */
+.header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ccfbf1;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 16px;
+    margin-right: 16px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #6b7280;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.nav-btn:hover {
+    color: #0d9488;
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    transform: translateY(-1px);
+}
+
+/* Hero Styles */
+.hero {
+    padding: 96px 0;
+}
+
+.hero-content {
+    max-width: 1024px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ccfbf1, #a7f3d0);
+    color: #0f766e;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 32px;
+}
+
+.hero-badge svg {
+    color: #14b8a6;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.title-line-1 {
+    background: linear-gradient(135deg, #0d9488, #0f766e, #0891b2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-line-2 {
+    background: linear-gradient(135deg, #0f766e, #059669, #0d9488);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-size: 20px;
+    color: #6b7280;
+    max-width: 512px;
+    margin: 0 auto 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #0d9488;
+    border: 2px solid #5eead4;
+    padding: 10px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #f0fdfa;
+    transform: translateY(-2px);
+}
+
+/* CTA Styles */
+.cta {
+    padding: 64px 0;
+}
+
+.cta-card {
+    max-width: 512px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #14b8a6, #0d9488, #0891b2);
+    color: white;
+    text-align: center;
+    padding: 64px 32px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(20, 184, 166, 0.2);
+}
+
+.cta-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.cta-description {
+    font-size: 18px;
+    color: #ccfbf1;
+    margin-bottom: 24px;
+}
+
+.cta-btn {
+    background: white;
+    color: #0d9488;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cta-btn:hover {
+    background: #f9fafb;
+    transform: translateY(-2px);
+}
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, #134e4a, #0f3730);
+    color: white;
+    padding: 32px 0;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-logo-icon {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #2dd4bf, #14b8a6);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.footer-logo-text {
+    font-weight: 600;
+    background: linear-gradient(135deg, #5eead4, #2dd4bf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-link {
+    color: #5eead4;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #ccfbf1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-buttons {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .hero {
+        padding: 64px 0;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .hero-description {
+        font-size: 18px;
+    }
+    
+    .cta-card {
+        padding: 48px 24px;
+    }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                
+
+                <h1 class="hero-title">
+                    <span class="title-line-1">Computer Data Assisted</span>
+                    <br>
+                    <span class="title-line-2">Management</span>
+                </h1>
+
+                <p class="hero-description">
+                    Transform your data with our intuitive management platform
+                </p>
+
+                <div class="hero-buttons">
+                    <button onclick="window.location.href='http://localhost/succlogin/login2.php'" class="btn-primary">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+                            <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
+                        </svg>
+                    </div>
+                    <span class="footer-logo-text">DataAssist</span>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="#" class="footer-link">Support</a>
+                    <a href="contactus.html" class="footer-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script>// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers for navigation buttons
+    const navButtons = document.querySelectorAll('.nav-btn');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Add active state animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+            
+            console.log(`Navigating to: ${this.textContent}`);
+        });
+    });
+
+    // Login button functionality
+    const loginBtn = document.querySelector('.login-btn');
+    loginBtn.addEventListener('click', function() {
+        // Add click animation
+        this.style.transform = 'translateY(-1px) scale(0.98)';
+        setTimeout(() => {
+            this.style.transform = 'translateY(-1px) scale(1)';
+        }, 150);
+        
+        console.log('Login clicked');
+        // Here you would typically redirect to login page or open modal
+    });
+
+    // Hero buttons functionality
+    const primaryBtn = document.querySelector('.btn-primary');
+    const secondaryBtn = document.querySelector('.btn-secondary');
+    
+    primaryBtn.addEventListener('click', function() {
+        console.log('Get Started Free clicked');
+        // Add ripple effect
+        createRipple(this, event);
+    });
+    
+    secondaryBtn.addEventListener('click', function() {
+        console.log('Watch Demo clicked');
+        createRipple(this, event);
+    });
+
+    // CTA button functionality
+    const ctaBtn = document.querySelector('.cta-btn');
+    ctaBtn.addEventListener('click', function() {
+        console.log('Start Your Free Trial clicked');
+        createRipple(this, event);
+    });
+
+    // Footer links functionality
+    const footerLinks = document.querySelectorAll('.footer-link');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(`Footer link clicked: ${this.textContent}`);
+            
+            // Add click animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
+
+    // Add scroll effect to header
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+
+    // Add intersection observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.hero-content, .cta-card');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Ripple effect function
+function createRipple(button, event) {
+    const ripple = document.createElement('span');
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.animation = 'ripple 0.6s linear';
+    ripple.style.pointerEvents = 'none';
+    
+    button.style.position = 'relative';
+    button.style.overflow = 'hidden';
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Add CSS for ripple animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .header {
+        transition: transform 0.3s ease;
+    }
+`;
+document.head.appendChild(style);
+
+// Add keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+    }
+});
+
+document.addEventListener('mousedown', function() {
+    document.body.classList.remove('keyboard-navigation');
+});
+
+// Add focus styles for keyboard navigation
+const focusStyle = document.createElement('style');
+focusStyle.textContent = `
+    .keyboard-navigation button:focus,
+    .keyboard-navigation a:focus {
+        outline: 2px solid #14b8a6;
+        outline-offset: 2px;
+    }
+`;
+document.head.appendChild(focusStyle);
+</script>
+</body>
+</html>
