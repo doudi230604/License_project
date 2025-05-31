@@ -1,3 +1,5 @@
+Sure Wael! Here's a clean and bug-free version of your README with improved formatting and correctly rendered code blocks:
+
 ---
 
 # 📂 CADM – Document Management System
@@ -23,7 +25,7 @@ A secure, role-based document management platform designed for organizations and
 
 ## 📁 Project Structure
 
-```
+```text
 succlogin/
 ├── css/             # Tailwind CSS and custom styles
 ├── DB/
@@ -88,29 +90,29 @@ $pass = '';
 
 ### 4. Serve the App
 
-* Place the project in your XAMPP server directory, e.g.:
+Place the project in your XAMPP server directory, e.g.:
 
 ```bash
 sudo cp -r License_project /opt/lampp/htdocs/succlogin
 ```
-or (on most XAMPP installations):
+
+or:
+
 ```bash
 sudo cp -r License_project ~/xampp/htdocs/succlogin
 ```
 
-* Open in browser:
+Open in your browser:
 
-```
-http://localhost/succlogin/home.html     # Landing page
-http://localhost/succlogin/login2.php    # Login page
-```
+* `http://localhost/succlogin/home.html` – Landing page
+* `http://localhost/succlogin/login2.php` – Login page
 
 ---
 
 ## 🧪 How to Use
 
 * **Admins**: Add/remove users, manage roles and permissions.
-* **Managers/Employees**: Upload/download/approve files.
+* **Managers/Employees**: Upload, download, approve files.
 * **Trash**: Deleted files are recoverable until permanently removed.
 * **Audit**: Track user actions for security and compliance.
 
@@ -118,13 +120,13 @@ http://localhost/succlogin/login2.php    # Login page
 
 ## 📌 Notes
 
-* **Database Folder**: Use only in local dev; avoid raw DB files in production.
-* **Uploads Folder**: Ensure `/uploads` is writable by the web server.
+* **Database Folder**: Use only for local development; avoid using raw DB files in production.
+* **Uploads Folder**: Ensure `uploads/` is writable by the web server.
 * **Security Tips**:
 
-  * Update default passwords.
-  * Enable HTTPS.
-  * Regularly backup data.
+  * Change default passwords
+  * Enable HTTPS
+  * Regularly back up data
 
 ---
 
@@ -137,7 +139,7 @@ Please create an issue to propose changes or report bugs.
 
 ## 🪪 License
 
-[MIT License](LICENSE)
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
@@ -149,4 +151,4 @@ Please create an issue to propose changes or report bugs.
 
 ---
 
-Would you like me to add badges (like GitHub stars or license info) or a screenshot of the UI at the top?
+Let me know if you'd like me to help with badges or a UI screenshot!
