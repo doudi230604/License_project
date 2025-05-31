@@ -43,11 +43,15 @@ git clone https://github.com/doudi230604/License_project.git
 cd License_project
 ```
 
+---
+
 ### 2. Set Up the Database
 
 #### Option A: Use Pre-built MySQL Files (Local Dev Only)
 
 > ⚠️ Only for compatible MySQL installations!
+
+##### 🐧 Linux (Ubuntu)
 
 ```bash
 # Stop MySQL first
@@ -61,6 +65,20 @@ sudo chown -R mysql:mysql /var/lib/mysql/succlogin
 
 # Restart MySQL
 sudo systemctl start mysql
+```
+
+##### 🪟 Windows (PowerShell)
+
+```powershell
+# Stop MySQL using XAMPP Control Panel
+
+# Open PowerShell as Administrator
+cd "C:\xampp\mysql\data"
+
+# Copy the raw database folder
+Copy-Item -Recurse -Path "Path\To\Project\DB\succlogin" -Destination "C:\xampp\mysql\data"
+
+# Restart MySQL from XAMPP Control Panel
 ```
 
 #### Option B: Import SQL Dump (Preferred for Production)
@@ -86,19 +104,24 @@ $pass = '';
 
 ### 4. Serve the App
 
-Place the project in your XAMPP server directory, e.g.:
+#### 🐧 Linux (Ubuntu)
 
 ```bash
+# Move project to XAMPP's htdocs directory
 sudo cp -r License_project /opt/lampp/htdocs/succlogin
-```
 
-or:
-
-```bash
+# Or if using XAMPP in your home directory
 sudo cp -r License_project ~/xampp/htdocs/succlogin
 ```
 
-Open in your browser:
+#### 🪟 Windows (PowerShell)
+
+```powershell
+# Copy project folder to XAMPP's htdocs
+Copy-Item -Recurse -Path "Path\To\License_project" -Destination "C:\xampp\htdocs\succlogin"
+```
+
+Then open your browser and visit:
 
 * `http://localhost/succlogin/home.html` – Landing page
 * `http://localhost/succlogin/login2.php` – Login page
@@ -116,7 +139,7 @@ Open in your browser:
 
 ## 📌 Notes
 
-* **Database Folder**: Use only for local development; avoid using raw DB files in production.
+* **Database Folder**: Use only for local development; avoid raw DB files in production.
 * **Uploads Folder**: Ensure `uploads/` is writable by the web server.
 * **Security Tips**:
 
