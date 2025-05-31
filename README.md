@@ -1,5 +1,3 @@
----
-
 # 📂 CADM – Document Management System
 
 A secure, role-based document management platform designed for organizations and universities.
