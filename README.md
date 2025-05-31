@@ -88,10 +88,14 @@ $pass = '';
 
 ### 4. Serve the App
 
-* Place the project in your server directory, e.g.:
+* Place the project in your XAMPP server directory, e.g.:
 
 ```bash
-sudo cp -r License_project /var/www/html/succlogin
+sudo cp -r License_project /opt/lampp/htdocs/succlogin
+```
+or (on most XAMPP installations):
+```bash
+sudo cp -r License_project ~/xampp/htdocs/succlogin
 ```
 
 * Open in browser:
