@@ -1,5 +1,3 @@
-Sure Wael! Here's a clean and bug-free version of your README with improved formatting and correctly rendered code blocks:
-
 ---
 
 # 📂 CADM – Document Management System
@@ -150,5 +148,3 @@ This project is licensed under the [MIT License](LICENSE).
 * [Terms of Service](termesService.html)
 
 ---
-
-Let me know if you'd like me to help with badges or a UI screenshot!
