@@ -1,134 +1,148 @@
-# CADM Document Management System
+---
 
-A secure, role-based document management platform for organizations and universities.  
-**Features:** file upload/download, approval workflow, trash/recycle bin, audit logs, user management, and access control.
+# 📂 CADM – Document Management System
+
+A secure, role-based document management platform designed for organizations and universities.
+
+> Upload, manage, approve, and audit documents with fine-grained control over user access.
 
 ---
 
-## 🚀 Features
+## ✨ Key Features
 
-- **User Authentication**: Secure login for Admin, Manager, and Employee roles.
-- **Role-Based Access**: Fine-grained permissions for uploading, modifying, deleting, and sharing files.
-- **File Management**: Upload, download, approve, and delete files with a modern UI.
-- **Trash/Recycle Bin**: Restore or permanently delete files.
-- **Audit Logs**: Track all user actions for transparency and compliance.
-- **User & Access Control**: Manage users, roles, and permissions from the admin panel.
-- **Responsive Design**: Works on desktop and mobile.
-- **Database-Backed**: MySQL/MariaDB for robust data storage.
+* 🔐 **User Authentication** – Login system with Admin, Manager, and Employee roles.
+* 🛡️ **Role-Based Access Control** – Precise permissions for file actions (upload, delete, modify).
+* 📁 **File Management** – Upload/download with an intuitive interface.
+* 🗑️ **Trash & Recovery** – Recover or permanently delete files from the trash.
+* 📜 **Audit Logs** – Track all user actions for transparency.
+* 👥 **User & Permission Management** – Admin panel for managing users and access levels.
+* 📱 **Responsive UI** – Works seamlessly on desktop and mobile.
+* 🛢️ **MySQL/MariaDB Backend** – Reliable and scalable database support.
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```
 succlogin/
-│
-├── css/                # Tailwind CSS and custom styles
-├── DB/                 # Database folder (see below)
-│   └── succlogin/      # MySQL table files (for local dev, not for production)
-├── uploads/            # Uploaded files (documents, spreadsheets, etc.)
-├── *.php               # Main PHP application files
-├── *.html              # Landing, policy, about, contact, etc.
-├── README.md           # This file
-└── ...
+├── css/             # Tailwind CSS and custom styles
+├── DB/
+│   └── succlogin/   # MySQL table files (raw data files for local dev)
+├── uploads/         # Uploaded documents and files
+├── *.php            # Core PHP app files
+├── *.html           # Static pages (landing, about, contact, etc.)
+└── README.md        # This file
 ```
 
 ---
 
-## ⚡ Quick Start
+## 🚀 Getting Started
 
-### 1. Clone the Repository
+### 1. Clone the Project
 
 ```bash
 git clone https://github.com/doudi230604/License_project.git
 cd License_project
 ```
 
-### 2. Database Setup
+### 2. Set Up the Database
 
-- **Option 1: Use Provided DB Folder (For Local Dev)**
-  - Copy the entire `DB/succlogin` folder into your MySQL data directory (e.g., `/var/lib/mysql/`).
-  - Make sure MySQL/MariaDB is stopped before copying.
-  - Set correct permissions:  
-    ```bash
-    sudo chown -R mysql:mysql /var/lib/mysql/succlogin
-    sudo systemctl start mysql
-    ```
-  - The database will be available as `succlogin`.
+#### Option A: Use Pre-built MySQL Files (Local Dev Only)
 
-- **Option 2: Import SQL (Recommended for Production)**
-  - If you have a `.sql` dump, import it:
-    ```bash
-    mysql -u root -p < succlogin.sql
-    ```
+> ⚠️ Only for compatible MySQL installations!
 
-### 3. Configure Database Connection
+```bash
+# Stop MySQL first
+sudo systemctl stop mysql
 
-- Edit [`config.php`](config.php) if your MySQL credentials differ:
-  ```php
-  $host = 'localhost';
-  $db   = 'succlogin';
-  $user = 'root';
-  $pass = '';
-  ```
+# Copy the raw DB folder
+sudo cp -r DB/succlogin /var/lib/mysql/
 
-### 4. Install Dependencies
+# Set correct ownership
+sudo chown -R mysql:mysql /var/lib/mysql/succlogin
 
-- No Composer dependencies required (pure PHP + MySQL).
-- For CSS, Tailwind is included as a static file.
+# Restart MySQL
+sudo systemctl start mysql
+```
 
-### 5. Run the Application
+#### Option B: Import SQL Dump (Preferred for Production)
 
-- Place the project in your web server root (e.g., `/var/www/html/succlogin`).
-- Access via:  
-  `http://localhost/succlogin/home.html` (landing)  
-  `http://localhost/succlogin/login2.php` (login)
+```bash
+mysql -u root -p < succlogin.sql
+```
 
 ---
 
-## 📝 Usage
+### 3. Configure DB Connection
 
-- **Login** with your credentials.
-- **Admins** can manage users, roles, and permissions.
-- **Managers/Employees** can upload, download, and manage files as allowed by their role.
-- **Trash**: Deleted files go to Trash and can be restored or permanently deleted.
-- **Audit Logs**: View all actions for accountability.
+Update your credentials in [`config.php`](config.php):
+
+```php
+$host = 'localhost';
+$db   = 'succlogin';
+$user = 'root';
+$pass = '';
+```
 
 ---
 
-## 📁 Important Notes
+### 4. Serve the App
 
-- **DB Folder**:  
-  - The `DB/succlogin` folder contains MySQL table files.  
-  - Only use this for local development with compatible MySQL versions.
-  - For production, use SQL dumps and migrations.
+* Place the project in your server directory, e.g.:
 
-- **Uploads Folder**:  
-  - All uploaded files are stored in `/uploads`.
-  - Ensure this folder is writable by the web server.
+```bash
+sudo cp -r License_project /var/www/html/succlogin
+```
 
-- **Security**:  
-  - Change default MySQL passwords.
-  - Use HTTPS in production.
-  - Regularly backup your database and uploads.
+* Open in browser:
+
+```
+http://localhost/succlogin/home.html     # Landing page
+http://localhost/succlogin/login2.php    # Login page
+```
+
+---
+
+## 🧪 How to Use
+
+* **Admins**: Add/remove users, manage roles and permissions.
+* **Managers/Employees**: Upload/download/approve files.
+* **Trash**: Deleted files are recoverable until permanently removed.
+* **Audit**: Track user actions for security and compliance.
+
+---
+
+## 📌 Notes
+
+* **Database Folder**: Use only in local dev; avoid raw DB files in production.
+* **Uploads Folder**: Ensure `/uploads` is writable by the web server.
+* **Security Tips**:
+
+  * Update default passwords.
+  * Enable HTTPS.
+  * Regularly backup data.
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome!  
-Open an issue to discuss new features or bug fixes.
+Open to pull requests and suggestions!
+Please create an issue to propose changes or report bugs.
 
 ---
 
-## 📄 License
+## 🪪 License
 
-MIT License. See [`LICENSE`](LICENSE).
+[MIT License](LICENSE)
 
 ---
 
-## 📞 Support
+## 📬 Contact & Support
 
-- [Contact Us](contactus.html)
-- [Policies](policies.html)
-- [Terms of Service](termesService.html)
+* [Contact Page](contactus.html)
+* [Policy Page](policies.html)
+* [Terms of Service](termesService.html)
+
+---
+
+Would you like me to add badges (like GitHub stars or license info) or a screenshot of the UI at the top?
