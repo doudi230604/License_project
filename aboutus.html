@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | GDAO Document Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #0d9488; /* Teal 600 */
+      --primary-light: #14b8a6; /* Teal 500 */
+      --primary-dark: #0f766e; /* Teal 700 */
+      --primary-bg: #f0fdfa; /* Teal 50 */
+      --primary-hover: #ccfbf1; /* Teal 100 */
+      --accent: #0891b2; /* Cyan 600 */
+      --accent-light: #06b6d4; /* Cyan 500 */
+      --text-primary: #134e4a; /* Teal 900 */
+      --border-color: #99f6e4; /* Teal 200 */
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, var(--primary-bg) 0%, #e0f2fe 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .about-container {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px rgba(13, 148, 136, 0.10), 0 1.5px 4px rgba(13,148,136,0.07);
+      border: 1px solid var(--border-color);
+      max-width: 800px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .about-header {
+      text-align: center;
+    }
+    .about-header h1 {
+      color: var(--primary-dark);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+    .about-header p {
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      opacity: 0.8;
+    }
+    .about-content {
+      color: var(--text-primary);
+      font-size: 1rem;
+      line-height: 1.7;
+      background: var(--primary-bg);
+      border-radius: 0.75rem;
+      padding: 1.5rem 1rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(13,148,136,0.06);
+    }
+    .about-content h2 {
+      color: var(--primary);
+      font-size: 1.15rem;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+    .about-content ul, .about-content ol {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+    .about-content li {
+      margin-bottom: 0.5em;
+    }
+    .team-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .team-title {
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .team-member {
+      background: var(--primary-hover);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      color: var(--primary-dark);
+      font-weight: 500;
+      min-width: 160px;
+      box-shadow: 0 2px 8px rgba(13,148,136,0.06);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .team-member i {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--primary-dark);
+      text-align: center;
+      opacity: 0.7;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="about-container">
+    <div class="about-header">
+      <h1>About Us</h1>
+      <p>Learn more about  Document Management and our mission to make document handling secure, efficient, and easy for everyone.</p>
+    </div>
+    <div class="about-content">
+      <h2>Our Mission</h2>
+      <p>
+        At CADM, our mission is to empower organizations and individuals with a robust, user-friendly document management platform. We believe in secure, accessible, and organized digital workspaces for all.
+      </p>
+      <h2>What We Offer</h2>
+      <ul>
+        <li>Secure file storage and sharing</li>
+        <li>Easy document upload, download, and approval workflows</li>
+        <li>Role-based access control and audit logs</li>
+        <li>Modern, intuitive interface</li>
+        <li>Responsive support and continuous improvements</li>
+      </ul>
+      <h2>Our Values</h2>
+      <ul>
+        <li><strong>Security:</strong> Protecting your data is our top priority.</li>
+        <li><strong>Transparency:</strong> Clear policies and audit trails for all actions.</li>
+        <li><strong>Innovation:</strong> We continuously improve our platform to meet your needs.</li>
+        <li><strong>Support:</strong> Our team is here to help you succeed.</li>
+      </ul>
+    </div>
+    <div class="team-section">
+      <div class="team-title">Meet Our Team</div>
+      <div class="team-list">
+        <div class="team-member">
+          <i class="fas fa-user-tie"></i>
+          <div>Darine Souilah</div>
+          <div style="font-size:0.95em; opacity:0.7;">Developer</div>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user"></i>
+          <div>Zehar Malek</div>
+          <div style="font-size:0.95em; opacity:0.7;">Developer</div>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user"></i>
+          <div>Ali Ahmed</div>
+          <div style="font-size:0.95em; opacity:0.7;">Finance</div>
+        </div>
+        <!-- Add more team members as needed -->
+      </div>
+    </div>
+    <div class="footer">
+      <p>&copy; 2025 GDAO Document Management. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
